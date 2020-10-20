@@ -1,7 +1,6 @@
 import React from 'react';
 import Menu from '../../components/menu';
 import Rodape from '../../components/rodape';
-import logo from '../../assets/img/logo.jpg';
 
 const NaoEncontrada = () => {
     return(
