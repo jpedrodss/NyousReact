@@ -1,13 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import Home from './pages/home';
+import Login from './pages/login';
+import Cadastrar from './pages/cadastrar';
+import NaoEncontrada from './pages/naoencontrada';
 import * as serviceWorker from './serviceWorker';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+
+// Define as rotas da aplicação
+const routing = (
+  <Router>
+      <Switch>
+        <Route exact path="/" component={Home}/>
+        <Route path="/login" component={Login}/>
+        <Route path="/cadastrar" component={Cadastrar}/>
+        <Route path="/naoencontrada" component={NaoEncontrada}/>
+      </Switch>
+  </Router>
+)
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  routing,
   document.getElementById('root')
 );
 
