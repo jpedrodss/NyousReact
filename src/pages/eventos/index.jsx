@@ -5,9 +5,9 @@ import Rodape from '../../components/rodape';
 const Eventos = () => {
     return (
         <div>
-            <Menu/>
-                <h1>Eventos</h1>
-            <Rodape/>
+            <Menu />
+            <h1>Eventos</h1>
+            <Rodape />
         </div>
     )
 }

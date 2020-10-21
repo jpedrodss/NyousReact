@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import Menu from '../../components/menu';
 import Rodape from '../../components/rodape';
 import { useHistory } from "react-router-dom";
-import logo from '../../assets/img/logo.jpg'
-import { Form, Container, Button } from 'react-bootstrap'
-import './index.css'
+import jwt_decode from "jwt-decode";
+import logo from '../../assets/img/logo.jpg';
+import { Form, Container, Button } from 'react-bootstrap';
+import './index.css';
 
 const Login = () => {
     let history = useHistory();
@@ -15,47 +16,57 @@ const Login = () => {
     const logar = (event) => {
         event.preventDefault();
 
-        fetch('https://localhost:44313/api/login',{
-            method : 'POST',
-            body : JSON.stringify({
-                email : email,
-                senha : senha
+        fetch('https://localhost:44313/api/login', {
+            method: 'POST',
+            body: JSON.stringify({
+                email: email,
+                senha: senha
             }),
-            headers : {
-                'content-type' : 'application/json'
+            headers: {
+                'content-type': 'application/json'
             }
         })
-        .then(response => {
-            // Verifica se a validação for OK e caso seja, informa a resposta
-            if(response.ok)
-                return response.json();
+            .then(response => {
+                // Verifica se a validação for OK e caso seja, informa a resposta
+                if (response.ok)
+                    return response.json();
 
-            // Caso validação não seja OK informa um alert
-            alert('Dado inválido');
-        })
-        .then(data => {
-            console.log(data);
-            
-            // Armazena o token
-            localStorage.setItem('token-nyous', data.token);
-            
-            // Após efetuar login encaminha a página de eventos
-            history.push("/eventos")
-        })
-        .catch(err => console.error(err));
+                // Caso validação não seja OK informa um alert
+                alert('Dado inválido');
+            })
+            .then(data => {
+                console.log(data);
+
+                // Armazena o token
+                localStorage.setItem('token-nyous', data.token);
+
+                let usuario = jwt_decode(data.token)
+
+                // Role = 1 (Administrador)
+                // Role = 2 (Padrão)
+
+                // Após efetuar login encaminha para uma página
+                if (usuario.Role === "1") {
+                    history.push("/admin/dashboard")
+                } else {
+                    history.push("/eventos")
+                }
+
+            })
+            .catch(err => console.error(err));
     }
 
-    return(
+    return (
         <div>
             <Menu />
             <Container className='form-height'>
                 <Form className='form-signin' onSubmit={event => logar(event)}>
                     <div className="text-center">
-                        <img src={logo} alt="Nyous" style={{width : "64px"}}/>
+                        <img src={logo} alt="Nyous" style={{ width: "64px" }} />
                     </div>
-                    <br/>
+                    <br />
                     <small>Informe os dados Abaixo</small>
-                    <hr/>
+                    <hr />
 
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email</Form.Label>
@@ -71,8 +82,8 @@ const Login = () => {
                         Enviar
                     </Button>
 
-                    <br/><br/>
-                    <a href="/cadastrar" style={{marginTop: '30px'}}>Não tenho conta!</a>
+                    <br /><br />
+                    <a href="/cadastrar" style={{ marginTop: '30px' }}>Não tenho conta!</a>
 
                 </Form>
             </Container>
