@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Menu from '../../components/menu';
 import Rodape from '../../components/rodape';
+import { url } from '../utils/constants'
 import { useHistory } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import logo from '../../assets/img/logo.jpg';
@@ -16,7 +17,7 @@ const Login = () => {
     const logar = (event) => {
         event.preventDefault();
 
-        fetch('https://localhost:44313/api/login', {
+        fetch(url + 'login', {
             method: 'POST',
             body: JSON.stringify({
                 email: email,

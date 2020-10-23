@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import jwt_decode from 'jwt-decode';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -45,8 +45,8 @@ const routing = (
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/login" component={Login} />
+      <Route path="/cadastrar" component={Cadastrar} />
       <RotaPrivada path="/eventos" component={Eventos} />
-      <RotaPrivada path="/cadastrar" component={Cadastrar} />
       <RotaPrivadaAdmin path="/admin/dashboard" component={Dashboard} />
       <RotaPrivadaAdmin path="/admin/crudeventos" component={CrudEventos} />
       <RotaPrivadaAdmin path="/admin/crudcategorias" component={CrudCategorias} />

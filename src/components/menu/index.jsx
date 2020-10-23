@@ -30,8 +30,8 @@ const Menu = () => {
             // Role = 2 (Padrão)
             return (
                 <Nav>
-                    <Nav.Link href="/admin/crudeventos">Eventos</Nav.Link>
                     <Nav.Link href="/admin/dashboard">Dashboard</Nav.Link>
+                    <Nav.Link href="/admin/crudeventos">Eventos</Nav.Link>
                     <Nav.Link href="/admin/crudcategorias">Categorias</Nav.Link>
                     <NavDropdown title={jwt_decode(token).nameid} id="basic-nav-dropdown">
                         <NavDropdown.Item href="/perfil">Perfil</NavDropdown.Item>
