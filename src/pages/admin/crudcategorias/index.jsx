@@ -6,7 +6,7 @@ import Rodape from '../../../components/rodape';
 import Titulo from '../../../components/titulo';
 
 const CrudCategorias = () => {
-    const [idCategoria, setId] = useState(0);
+    const [idCategoria, setIdCategoria] = useState(0);
     const [titulo, setTitulo] = useState('');
     const [urlImagem, setUrlImagem] = useState('');
     const [categorias, setCategorias] = useState([]);
@@ -19,7 +19,8 @@ const CrudCategorias = () => {
         fetch(url + 'categorias')
             .then(response => response.json())
             .then(data => {
-                setCategorias(data)
+                setCategorias(data);
+                limparCampos();
             })
             .catch(err => console.error(err));
     }
@@ -27,12 +28,13 @@ const CrudCategorias = () => {
     const editar = (event) => {
         event.preventDefault();
 
-        fetch(url + 'categorias/' + event.target.value)
+        fetch(`${url}categorias/${event.target.value}`)
             .then(response => response.json())
             .then(dado => {
                 console.log(dado)
-                this.setState({ id: dado.id })
-                this.setState({ titulo: dado.titulo })
+                setIdCategoria(dado.idCategoria)
+                setTitulo(dado.titulo)
+                setUrlImagem(dado.urlImagem)
             })
     }
 
@@ -65,9 +67,9 @@ const CrudCategorias = () => {
             method: 'POST',
             body: formdata
         })
-            .then(response => response.json)
+            .then(response => response.json())
             .then(data => {
-                setUrlImagem(data.url)
+                setUrlImagem(data.url);
             })
             .catch(err => console.error(err))
     }
@@ -99,7 +101,7 @@ const CrudCategorias = () => {
     }
 
     const limparCampos = () => {
-        setId(0);
+        setIdCategoria(0);
         setTitulo('');
         setUrlImagem('');
     }
@@ -120,7 +122,7 @@ const CrudCategorias = () => {
                                 <Form.Control type="text" value={titulo} onChange={event => setTitulo(event.target.value)} placeholder="Tecnologia, Inovação, Startups.." />
                                 <Form.Group>
                                     <Form.File id="fileCategoria" label="Imagem da Categoria" onChange={event => uploadFile(event)} />
-                                    {urlImagem && <img src={urlImagem} style={{ widht: '120px' }} />}
+                                    {urlImagem && <img src={urlImagem} style={{widht: '120px'}} />}
                                 </Form.Group>
                             </Form.Group>
                             <Button type="submit">Salvar</Button>
