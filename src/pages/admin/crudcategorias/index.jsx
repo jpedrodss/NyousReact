@@ -122,7 +122,7 @@ const CrudCategorias = () => {
                                 <Form.Control type="text" value={titulo} onChange={event => setTitulo(event.target.value)} placeholder="Tecnologia, Inovação, Startups.." />
                                 <Form.Group>
                                     <Form.File id="fileCategoria" label="Imagem da Categoria" onChange={event => uploadFile(event)} />
-                                    {urlImagem && <img src={urlImagem} style={{widht: '120px'}} />}
+                                    {urlImagem && <img src={urlImagem} style={{height: '120px'}} />}
                                 </Form.Group>
                             </Form.Group>
                             <Button type="submit">Salvar</Button>
